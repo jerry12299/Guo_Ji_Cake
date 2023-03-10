@@ -1,0 +1,239 @@
+@import "main_ginnychen19.css";
+
+/* *{
+    border: 1px solid red;
+} */
+
+body {
+    flex-direction: column;
+    background-image: radial-gradient(var(--BG_LOrange) 2px, transparent 2px),
+        radial-gradient(var(--BG_LOrange) 2px, transparent 2px);
+    background-size: calc(20 * 2px) calc(20 * 2px);
+    background-position: 0 0, calc(10 * 2px) calc(10 * 2px);
+}
+
+#permanentCake {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 70px 15% ;
+    /* border: 1px  solid salmon; */
+}
+
+/*=========左邊種類索引列========================================*/
+.PMCake_table {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+
+    flex: 1;
+    min-width: 220px;
+    height: 100vh;
+
+    font-family: "GenJyuuGothic-L";
+    font-size: var(--pContent);
+
+    border-radius: 10px;
+    border: 3px solid var(--Brown01);
+
+    background-color: var(--YWhite);
+    -webkit-box-shadow: 0px 0px 20px 0px var(--Brown04_BE); 
+    box-shadow: 0px 0px 20px 0px var(--Brown04_BE);
+
+    overflow: hidden;
+}
+
+.PMCake_table>thead {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--Brown01);
+
+}
+
+.PMCake_table>tbody {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    padding: 10px;
+}
+
+
+.PMCake_table>thead th {
+    letter-spacing: 5px;
+
+    padding: 10px 20px;
+    color: var(--YWhite);
+}
+
+.PMCake_table>tbody>tr>td {
+    letter-spacing: 3px;
+
+    font-family: "GenJyuuGothic-B";
+
+    padding: 5px 20px;
+    color: var(--Brown01);
+}
+
+.list>tr>td>a:after {
+    display: block;
+    content: '';
+    border-bottom: solid 2px var(--Brown01);
+    transform: scaleX(0);
+    transform-origin:  0% ;
+    transition: transform 250ms ease-in-out;
+}
+.list>tr>td>a:hover:after {
+    transform: scaleX(1);
+}
+
+/*========右邊蛋糕展示區========================================*/
+/*-----標題設定------*/
+.PMCake_show {
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+
+    justify-content: center;
+    align-items: center;
+
+    flex: 3;
+
+    margin: 0 0 0 70px;
+
+    /* background-color: blueviolet; */
+}
+
+.PMCake_show_content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    align-content: flex-start;
+
+    /* background-color: aqua; */
+
+    border-bottom: 3px solid var(--Brown01);
+    margin: 0 0 30px 0;
+}
+
+.PMCake_show_content>h6,
+.PMCake_show_content>p {
+    margin: 0;
+}
+
+/*-----蛋糕列設定------*/
+.PMCake_show_commodity {
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: space-evenly;
+
+    /* background-color: rgb(16, 16, 59); */
+
+}
+
+.commodity_item {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: blue;  */
+
+    margin: 0 10px 30px 10px;
+}
+.commodity_item img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    
+
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.commodity_item a {
+    position: relative;
+}
+
+.commodity_item a>p {
+    position: absolute;
+    top: 0px;
+    right: 40px;
+    z-index: 2;
+    color: var(--color01);
+    letter-spacing: 2px;
+}
+
+.commodity_item>div:first-child {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+    background-color: var(--YWhite);
+    transition: 0.5s ease-in-out;
+}
+
+.commodity_item>div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+
+    margin: 10px 0 0 0;
+    /* background-color: rgb(124, 194, 13); */
+}
+
+.commodity_item>div:nth-child(2)>p {
+    text-align: justify;
+    margin: 0;
+}
+
+/*-----蛋糕列hover用------*/
+fork{
+    height: 80px;
+    width: 80px;
+
+    position: absolute;
+    top: -100px;
+    right: -20px;
+    transform: rotate(40deg);
+    z-index: 2;
+
+    background-image: url(../Source/SVG/fork.svg);
+
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+color {
+    position: absolute;
+    top: -79px;
+    right: 0px;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+    z-index: 1;
+    background-color: rgba(126, 126, 126, 0.5);
+}

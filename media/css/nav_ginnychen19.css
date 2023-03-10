@@ -1,0 +1,193 @@
+@import "main_ginnychen19.css";
+
+/* * {
+    border: 1px solid seagreen;
+} */
+
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+
+    display: flex;
+    flex-direction: row;
+    z-index: 4;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 40px;
+    transition: 1.0 ease;
+
+    background-color: hsla(0, 0%, 100%, 0.5);
+
+    font-family: "GenJyuuGothic-B";
+    color: var(--Brown02);
+    letter-spacing: 2px;
+}
+nav>div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+nav>div img {height: 50px;margin: 0 20px 0 0;}
+nav a{text-decoration: none;}
+nav>div:first-of-type>a>p{font-size: 1.4em; margin: 0;}
+nav>#navlist>a>p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 0;
+    font-size: 1.4em;
+
+    /* background-color:aqua; */
+}
+#navlist{
+    min-width: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+#navlist svg {
+    width: fit-content;
+    height: fit-content;
+}
+
+/*線段hover功能*/
+nav>div#navlist>a:after,
+nav>div>a>p:after {
+    display: block;
+    content: '';
+    border-bottom: solid 2px var(--Brown01);
+    transform: scaleX(0);
+    transform-origin:  0% ;
+    transition: transform 250ms ease-in-out;
+}
+nav>div#navlist>a:hover:after,
+nav>div>a>p:hover:after  {
+    transform: scaleX(1);
+}
+
+
+
+.BEndnav {
+    position: fixed;
+    width: 20%;
+    min-width: 250px;
+    height: 100%;
+    left: 0px;
+
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+
+    /* 水平置中 */
+    justify-content: start;
+    /* 垂直置中 */
+    align-items: center;
+
+    padding: 40px 20px;
+    transition: 1.0 ease;
+
+    background-color: var(--Brown02);
+}
+
+.BEndnav>div:first-child {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 30px 0;
+}
+
+.BEndnav>div:first-child>h6 {
+    color: var(--YWhite);
+    margin: 0;
+}
+
+.BEndnav>div:first-child>p {
+    margin: 0;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: var(--YWhite);
+}
+
+.BEndnav>div:first-child>img {
+    width: 100px;
+    margin: 0 0 20px 0;
+}
+
+
+
+.BEndnav>div:last-child {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.BEndnav>div:last-child>div {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.BEndnav>div:last-child>div>div>h6 {
+    margin: 0;
+}
+
+p1 {
+    font-family: "GenJyuuGothic-B";
+    font-size: 24px;
+    color: var(--Brown04_BE);
+    letter-spacing: 5px;
+}
+
+.addline {
+    display: block;
+    width: 72%;
+    margin: 0 0 5px 0;
+    border-bottom: solid 2px var(--Brown04_BE);
+    transform: scaleX(0);
+    transform-origin: 0%;
+    transition: transform 250ms ease-in-out;
+}
+
+.BEndnav>div:last-child>div>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aqua; */
+    margin: 15px 0;
+}
+
+.BEndnav>div:last-child>div>div>img {
+    height: 30px;
+    margin: 0 10px 0 0;
+}
+
+
+/*按鈕處理*/
+input[value="登出"] {
+    padding: 3px 10px;
+    margin: 30px 0 0 0;
+    background-color: var(--Brown04_BE);
+
+    color: var(--YWhite);
+    font-family: "GenJyuuGothic-B";
+    font-size: var(--pSTitle);
+
+    border-radius: 5px;
+    border: 2px solid transparent;
+}
+
+input[value="登出"]:hover {
+    box-sizing: border-box;
+    border: 2px solid var(--Brown04_BE);
+    background-color: var(--YWhite);
+    color: var(--Brown04_BE);
+}

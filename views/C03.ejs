@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菓季-餡料食材介紹</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/08-14.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <style>
+        /* 字型引用 */
+        @font-face {
+            font-family: 'GenSenRounded-B';
+            src: local("GenSenRounded-B"),
+                url('../Source/ttc/GenSenRounded-B.ttc') format("woff"),
+                url('../Source/ttc/GenSenRounded-B.ttc') format("opentype"),
+                url('../Source/ttc/GenSenRounded-B.ttc') format("embedded-opentype");
+        }
+
+        /* 色票表 */
+        :root {
+            --sky: #a6dbf5;
+
+            --Green01: #368284;
+            --Green02: #628e59;
+            --Green03: #fff1c5;
+            --Green04: #87c379;
+
+            --YWhite: #F6F3E4;
+            --GWhite: #F7F8F3;
+
+            --BG_LYellow: #f0da99;
+            --BG_LOrange: #F3D1B2;
+            --BG_MOrange: #f7bc88;
+
+            --Brown01: #5c3a31;
+            --Brown02: #835B36;
+            --Brown03: #BB8058;
+
+            --Brown04_BE: #b79779;
+            --Brown05_BEtxt: #876464;
+
+            --BTN_Red: #e3344b;
+            --BTN_Green: #337e47;
+            --BTN_Yellow: #f39800;
+        }
+
+        /* 字型套用 */
+        body {
+            font-family: GenSenRounded-B !important;
+            background-color: var(--Green03);
+        }
+
+        nav {
+            width: 100vw;
+            position: fixed;
+            top: 0px;
+            margin: 0;
+
+            display: flex;
+            flex-direction: row;
+            z-index: 4;
+
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 10px 100px 10px 40px;
+            transition: 1.0 ease;
+
+            background-color: hsla(0, 0%, 100%, 0.5);
+
+            color: var(--Brown02);
+            letter-spacing: 2px;
+        }
+
+        nav>div:first-of-type {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav>div img {
+            height: 50px;
+            margin: 0 20px 0 0;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        nav>div:first-of-type>a>p {
+            font-size: 1.4em;
+            margin: 0;
+            color: var(--Brown01);
+        }
+
+        nav>#navlist>a>p {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-size: 1.2em;
+            color: var(--Brown01);
+        }
+
+        #navlist {
+            min-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 100px 0 0;
+        }
+
+        #navlist svg {
+            width: fit-content;
+            height: fit-content;
+            color: var(--Brown01);
+        }
+
+        /*線段hover功能*/
+        nav>div#navlist>a:after,
+        nav>div>a>p:after {
+            display: block;
+            content: '';
+            border-bottom: solid 2px var(--Brown01);
+            transform: scaleX(0);
+            transform-origin: 0%;
+            transition: transform 250ms ease-in-out;
+        }
+
+        nav>div#navlist>a:hover:after,
+        nav>div>a>p:hover:after {
+            transform: scaleX(1);
+        }
+
+        /* ----------------AD----------------- */
+        .Our-newAD {
+            position: relative;
+            z-index: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 70px 0 0 0;
+            margin: 0px 0 0 0;
+            /* transition: 1.0 ease; */
+            overflow: hidden;
+
+        }
+
+        .Our-newAD>div {
+            width: 100vw;
+        }
+
+        .swiper {
+            width: 100vw;
+            height: 400px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .autoplay-progress {
+            bottom: 0px;
+            z-index: 10;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--swiper-theme-color);
+            visibility: hidden;
+
+            background-color: #0061f3;
+        }
+
+        .autoplay-progress svg {
+            --progress: 0;
+            position: absolute;
+            left: 0;
+            top: 0px;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            stroke-width: 10px;
+            stroke: var(--swiper-theme-color);
+            fill: var(--GWhite);
+            stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+            stroke-dasharray: 125.6;
+            transform: rotate(-90deg);
+        }
+
+        #btn_next,
+        #btn_prev {
+            color: #fff;
+        }
+
+        /* ----------------------------------------- */
+
+        #footer>img {
+            width: 100vw;
+        }
+
+        footer {
+            position: relative;
+            width: 100%;
+            min-width: 1440px;
+            background-image: url(../Source/IMG/Key-Vision/middle_long.png);
+            background-position: top;
+            background-size: 60%;
+            background-repeat: repeat-x;
+            z-index: 3;
+            height: 600px;
+            color: var(--GWhite);
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 30px 0px 30px;
+            color: var(--YWhite);
+        }
+
+        #icon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #icon>div {
+            margin: 50px;
+        }
+
+        #icon a>img {
+            width: 50px;
+            margin: 0 10px;
+        }
+
+        /* ------LINE彈跳視窗------------------------------- */
+
+        #LINE_QR {
+            position: fixed;
+            right: 60px;
+            bottom: 180px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-items: center;
+            width: 15vw;
+            border-radius: 10px;
+            z-index: 99;
+            visibility: hidden;
+        }
+
+        #LINE_QR>div {
+            background-color: #07B53B;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-radius: 10px 10px 0px 0px;
+
+
+        }
+
+        #LINE_QR>div>svg {
+            color: var(--color01);
+            padding: 15px;
+        }
+
+        #LINE_QR>div>p {
+            margin: 0 10px 0 0;
+            color: var(--color01);
+            cursor: pointer;
+        }
+
+        #LINE_QR>img {
+            width: 8vw;
+            padding-top: 20px;
+        }
+
+        #LINE_QR>p {
+            font-size: 1rem;
+            padding: 20px;
+
+        }
+
+
+        /* ---------------側邊btn----------------- */
+        #Btnlist {
+            position: fixed;
+            right: 0;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            z-index: 50;
+        }
+
+        .mainbtn {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            margin: 5px 0;
+        }
+
+        #Btnlist div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.2s ease-in-out;
+        }
+
+        .Line {
+            background-color: #198754;
+            color: white;
+            border: 3px solid transparent;
+        }
+
+        .Line:hover {
+            background-color: white;
+            color: #198754;
+            border: 3px solid #198754;
+        }
+
+        .Email {
+            background-color: #dc3545;
+            color: white;
+            border: 3px solid transparent;
+        }
+
+        .Email:hover {
+            background-color: white;
+            color: #dc3545;
+            border: 3px solid #dc3545;
+        }
+
+        .goTop {
+            background-color: #6c757d;
+            color: white;
+            border: 3px solid transparent;
+        }
+
+        .goTop:hover {
+            background-color: white;
+            color: #6c757d;
+            border: 3px solid #6c757d;
+        }
+
+        /*福窗*/
+        .ShowMSG {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-color: hsla(0, 0%, 0%, 0.2);
+
+            display: none;
+            justify-content: center;
+            align-items: center;
+            border: none;
+
+            z-index: 5;
+            cursor: pointer;
+        }
+
+        .ShowMSG>div {
+            display: flex;
+            flex-direction: column;
+            max-width: 450px;
+
+            background-color: var(--Brown04_BE);
+
+            border-radius: 30px;
+            border: 10px solid var(--Brown01);
+            cursor: default;
+        }
+
+        .ShowMSG>div>div:first-child {
+            display: flex;
+            justify-content: flex-end;
+            background-color: var(--Brown01);
+            width: 100%;
+        }
+
+        .ShowMSG>div>div:first-child h6 {
+            color: var(--Brown04_BE);
+            margin: 0;
+            padding: 0px 20px 5px 20px;
+            cursor: pointer;
+        }
+
+        .ShowMSG>div>div:last-of-type {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .ShowMSG>div>div:last-of-type>img {
+            max-width: 40%;
+        }
+
+        .ShowMSG>div>div:last-of-type>h6 {
+            max-width: 40%;
+            font-size: var(--pBTitle);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- nav-->
+    <nav>
+        <div>
+            <a href="/"><img src="../Source/IMG/Logo.png" alt="Logo"></a>
+            <a href="/">
+                <p>菓季</p>
+            </a>
+        </div>
+        <div id="navlist">
+            <a href="/C01/0">
+                <p>主題蛋糕</p>
+            </a>
+            <a href="/C02">
+                <p>客製蛋糕</p>
+            </a>
+            <a href="/C03">
+                <p>餡料食材介紹</p>
+            </a>
+            <a href="/C04">
+                <p>常見問題</p>
+            </a>
+            <% if(!session.user) { %>
+                <a href="/C05"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                    </svg></a>
+                <% }else if(session.user.rights){%>
+                    <a href="/C05_2/1"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                            fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                        </svg></a>
+                    <%}else{%>
+                        <a href="/C05_4/1"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                            </svg></a>
+                        <%}%>
+                            <a href="/C06"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                    fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg></a>
+        </div>
+    </nav>
+    <!-- 預留固定輪播的位置 -->
+    <div class="Our-newAD">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="../Source/IMG/ad1.png" alt=""></div>
+                <div class="swiper-slide"><img src="../Source/IMG/ad2.png" alt=""></div>
+                <div class="swiper-slide"><img src="../Source/IMG/ad3.png" alt=""></div>
+            </div>
+
+            <div id="btn_next" class="swiper-button-next"></div>
+            <div id="btn_prev" class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+            <div class="autoplay-progress">
+                <svg viewBox="0 0 48 48">
+                    <circle cx="24" cy="24" r="20"></circle>
+                </svg>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div id="LINE_QR" class="animate__animated ">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-line"
+                viewBox="0 0 16 16">
+                <path
+                    d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0ZM5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.154.154 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157Zm.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156h-.562Zm3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832a.17.17 0 0 0-.013-.015v-.001a.139.139 0 0 0-.01-.01l-.003-.003a.092.092 0 0 0-.011-.009h-.001L7.88 4.79l-.003-.002a.029.029 0 0 0-.005-.003l-.008-.005h-.002l-.003-.002-.01-.004-.004-.002a.093.093 0 0 0-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.154.154 0 0 0 .039.038l.001.001.01.006.004.002a.066.066 0 0 0 .008.004l.007.003.005.002a.168.168 0 0 0 .01.003h.003a.155.155 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156h-.561Zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.155.155 0 0 0-.108.044h-.001l-.001.002-.002.003a.155.155 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.155.155 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z" />
+            </svg>
+            <p id="close">X</p>
+        </div>
+        <img src="/Source/IMG/LINE.jpg" alt="">
+        <p>請在LINE應用程式上開啟「好友」分頁，點選畫面右上方用來加入好友的圖示，
+            接著點選「行動條碼」，然後掃描此行動條碼。</p>
+    </div>
+    <div id="Btnlist">
+        <div id="Line" class="mainbtn Line">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-line"
+                viewBox="0 0 16 16">
+                <path
+                    d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0ZM5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.154.154 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157Zm.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156h-.562Zm3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832a.17.17 0 0 0-.013-.015v-.001a.139.139 0 0 0-.01-.01l-.003-.003a.092.092 0 0 0-.011-.009h-.001L7.88 4.79l-.003-.002a.029.029 0 0 0-.005-.003l-.008-.005h-.002l-.003-.002-.01-.004-.004-.002a.093.093 0 0 0-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.154.154 0 0 0 .039.038l.001.001.01.006.004.002a.066.066 0 0 0 .008.004l.007.003.005.002a.168.168 0 0 0 .01.003h.003a.155.155 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156h-.561Zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.155.155 0 0 0-.108.044h-.001l-.001.002-.002.003a.155.155 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.155.155 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z" />
+            </svg>
+        </div>
+        <div id="Email" class="mainbtn Email" onclick="self.location.href='mailto:GuoJicake@gmail.com'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                <path
+                    d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+            </svg>
+        </div>
+        <div id="goTop" class="mainbtn goTop">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-up"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- 食材與內餡區域 -->
+    <div class="cakearea">
+        <div class="cakeprobox">
+            <!-- 食材圖 -->
+            <div class="stuffingtitle">
+                <img src="Source/IMG/C03_img/cabinet_label1.png" alt=""><br>
+                <!-- <h3>內餡</h3> -->
+            </div>
+            <img src="Source/IMG/C03_img/cabinet_top.png" alt="" width="100%" height="100%">
+            <!-- 四大內餡區域-->
+            <div class="cakebox">
+                <div class="card">
+                    <div class="card_body">
+                        <div class="card_front">
+                            <img src="Source/IMG/C03_img/草莓覆盆子.jpg" alt="" class="card_img">
+                        </div>
+                        <div class="card_back">
+                            <h1 class="card_title">草莓覆盆子</h1>
+                            <h3 class="card_title">最暢銷口味，老少咸宜，孩子的最愛!</h3>
+                            <p>
+                                原物料: <br>蛋、三溫糖、覆盆子果泥、奶油、吉利丁、<br>草莓果粒/果泥、葡萄糖漿、柑橘果膠
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card_body">
+                        <div class="card_front">
+                            <img src="Source/IMG/C03_img/巧克力巴瑞脆片.jpg" alt="" class="card_img">
+                        </div>
+                        <div class="card_back">
+                            <h1 class="card_title">巧克力巴瑞脆片</h1>
+                            <h3 class="card_title">黃金比例搭配的苦甜巧克力, 是巧克力迷不能錯過的滋味</h3>
+                            <p>
+                                原物料: <br>70%黑巧克力,甜巧克力,鮮奶油,榛果醬,巴瑞脆片
+
+                                蛋奶素可<br>果粒/果泥，葡萄糖漿，柑橘果膠
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card_body">
+                        <div class="card_front">
+                            <img src="../../../Source/IMG/C03_img/檸檬藍莓.jpg" alt="" class="card_img">
+                        </div>
+                        <div class="card_back">
+                            <h1 class="card_title">檸檬藍莓</h1>
+                            <h3 class="card_title">孕媽媽首推口味~ 嗜酸者的最愛, 夏季暢銷選擇！</h3>
+                            <p>
+                                原物料: <br>蛋，三溫糖,檸檬原汁,奶油,吉利丁,藍莓果粒
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card_body">
+                        <div class="card_front">
+                            <img src="../../../Source/IMG/C03_img/焦糖香蕉.jpg" alt="" class="card_img">
+                        </div>
+                        <div class="card_back">
+                            <h1 class="card_title">海鹽焦糖香蕉</h1>
+                            <h3 class="card_title">經典法式口味搭配台灣水果,是歐美歸國華僑/學子指定口味</h3>
+                            <p>
+                                原物料: <br>蛋,細砂糖,牛奶,奶油, 新鮮香蕉片,蛋奶素可
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img src="Source/IMG/C03_img/cabinet_center.png" alt="" width="100%">
+            </div>
+            <!-- 食材區域 -->
+            <div class="ingredientsArea">
+                <div class="ingredients">
+                    <img src="Source/IMG/C03_img/cabinet_label2.png" alt="">
+                    <!-- <h3>食材</h3> -->
+                </div>
+                <div class="container">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/可可巴芮小脆片.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>可可巴芮<br> 小脆片</h2>
+                            <p>產地：法國<br>甜脆的口感，與巧克力與榛果醬結合，為巧克力蛋糕增加香脆口感！<br>使用產品：巧克力蛋糕內餡
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/發酵無鹽奶油.png" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>發酵無鹽奶油</h2>
+                            <p>使用產品：蛋糕體/杯子蛋糕, 覆盆子/焦糖/檸檬內餡, <br>馬卡龍內餡（黑醋栗/百香果),瑪德蓮,餅乾,派皮</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/海藻糖.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>TREHA海藻糖</h2>
+                            <p>產地：日本<br>甜度為砂糖之45﹪：海藻糖有溫和的甜味卻比砂糖更為持久，可改善含高量砂糖食品的甜膩感。
+                                <br>使用產品：蛋糕體/ 杯子蛋糕/ 瑪德蓮
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/九如檸檬汁.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>九如檸檬汁</h2>
+                            <p>產地：屏東</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ingredientsArea">
+                <div class="container">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/BOIRON百香果果泥.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>BOIRON百香果泥<br></h2>
+                            <p>產地：法國<br>獨特的急速冷凍技術，完全保有如新鮮口感般的水果風味<br>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/BOIRON藍莓果泥.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>BOIRON藍莓果泥</h2>
+                            <p>產地：法國<br>獨特的急速冷凍技術，完全保有如新鮮口感般的水果風味</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/冷冻莓-17504975.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>BOIRON<br>冷凍草莓</h2>
+                            <p>產地：法國<br>富含有助於膠原蛋白形成的維生素C</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/BOIRON冷凍藍莓粒.png" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>BOIRON<br>冷凍藍莓<br></h2>
+                            <p>產地：法國<br>富含15種花青素幫助清除自由基</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ingredientsArea">
+                <div class="container">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/CACAO BARRY 黑巧克力.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>CACAOBARRY<br>黑巧克力</h2>
+                            <p>產地：法國<br>法國花郜苦甜調溫巧克力70%, 具有幽長綿延的果香風味及香料芬芳</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/CACAO BARRY防潮可可粉.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>CACAOBARRY<br>可可粉</h2>
+                            <p>使用產品：巧克力蛋糕/杯子蛋糕,巧克力淋面<br>（蛋糕外觀流下來部分）</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/苦甜代可可脂黑巧克力.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>苦甜可可黑巧</h2>
+                            <p>產地：馬來西亞<br>以甜巧克力的角色,加入70%巧克力中
+                                <br>使用產品：巧克力醬,巧克力蛋糕,巧克力恐龍模型
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/COCOBARRY白巧克力.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>COCOBARRY白巧克力</h2>
+                            <p>產地：法國<br>
+                                札飛柔滑白巧克力 34%,糖份減低表現出極度輕柔與隱晦的甜度
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ingredientsArea">
+                <div class="container">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/吉利丁.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>吉利丁片</h2>
+                            <p>使用產品：蛋糕內餡<br>使用產品：蛋糕內餡（覆盆子草莓/ 檸檬醬）、檸檬派、淋面（蛋糕外觀流下來部分）</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/明治三溫糖.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>明治三溫糖</h2>
+                            <p>產地：日本<br>
+                                日本特有的砂糖，將純蔗糖結晶後殘留的糖液，傳統做法會經過三次加熱及結晶處理，其名「三溫」便是從自於此</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/鐵塔鮮奶油.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>鐵塔鮮奶油</h2>
+                            <p>產地：法國<br>
+                                <br>使用產品：巧克力醬,原味杯子蛋糕體,淋面（蛋糕外觀流下來部分）
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="../../../Source/IMG/C03_img/新鮮香蕉.jpg" alt="">
+                        </div>
+                        <div class="text-box">
+                            <h2>新鮮香蕉</h2>
+                            <p>產地：台灣<br>
+                                來自台灣的小農，新鮮採摘當天進貨
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img src="Source/IMG/C03_img/cabinet_body.png" alt="" width="100%">
+            </div>
+        </div>
+    </div>
+    <!-- 預留固定footer的位置 -->
+    <footer>
+        <div id="footer">
+            <div id="icon">
+                <div>
+                    <img id="footerLogo" src="./Source/IMG/Logo.png" alt="Logo" style="width: 100px;">
+                    <a href="https://www.facebook.com/ispanTaipei" target="_blank"><img src="./Source/IMG/FB.png"
+                            alt=""></a>
+                    <a href="https://www.instagram.com/5gutlab_zicehui/" target="_blank"><img src="./Source/IMG/ig.png"
+                            alt=""></a>
+                    <a onclick="self.location.href='mailto:iservice@ispan.com.tw;'"><img src="./Source/IMG/mail.png"
+                            alt=""></a>
+                </div>
+                <div>
+                    <h4>訂購電話</h4>
+                    <h6>04-1234567</h6><br>
+                    <h4>營業時間</h4>
+                    <h6>週二-週日10:00至19:00 每週一公休</h6><br>
+                    <h4>地址</h4>
+                    <h6>台中市南屯區公益路二段(國泰世華大樓18樓)</h6>
+                </div>
+            </div>
+            <div>
+                <small>Copyright © 2023 MFEE32 第一組. All rights reserved.</small>
+            </div>
+        </div>
+    </footer>
+    <!-- ---------------------------引用區---------------------------------------- -->
+    <script src="./js/_js/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="../js/ADswiper.js"></script>
+    <script src="../js/goTop.js"></script>
+    <script>
+        // LINE視窗
+        const line = document.getElementById("Line");
+        const Close = document.getElementById("close");
+        const Linediv = document.getElementById("LINE_QR");
+
+        line.addEventListener("click", function () {
+            Linediv.style.visibility = "visible";
+            Linediv.classList.remove("animate__bounceOutDown");
+            Linediv.classList.add("animate__bounceInUp")
+        });
+
+        Close.addEventListener("click", function () {
+            Linediv.classList.remove("animate__bounceInUp")
+            Linediv.classList.add("animate__bounceOutDown")
+            setTimeout(function () {
+                Linediv.style.visibility = "hidden";
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

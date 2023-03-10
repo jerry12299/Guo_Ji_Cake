@@ -1,0 +1,350 @@
+@import "main_ginnychen19.css";
+
+body {
+    flex-direction: column;
+}
+
+/*訂單成功*/
+.orderSuccess,
+.ShowBigPic {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: hsla(0, 0%, 0%, 0.2);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    z-index: 5;
+    cursor: pointer;
+}
+
+.ShowBigPic>div {
+    width: 900px;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+.ShowBigPic img {
+    width: 900px;
+    height: 900px;
+
+    background-color: var(--Brown04_BE);
+    transition: 0.3s ease-in;
+}
+
+/* * {
+    border: 1px solid red;
+} */
+.orderSuccess>div {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+
+    background-color: var(--YWhite);
+
+    border-radius: 30px;
+    border: 10px solid var(--Brown01);
+    cursor: default;
+}
+
+.orderSuccess>div>div:first-child {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--Brown01);
+    width: 100%;
+}
+
+.orderSuccess>div>div:first-child h6 {
+    color: var(--YWhite);
+    margin: 0;
+    padding: 0px 20px 5px 20px;
+    cursor: pointer;
+}
+
+.orderSuccess>div>div:last-of-type {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    padding: 20px 0 0 0;
+}
+
+.orderSuccess>div>div:last-of-type>img {
+    max-width: 50%;
+}
+
+/*======================================================*/
+#PMCakeDetail {
+    display: flex;
+    flex-direction: row;
+
+    min-width: 500px;
+
+    justify-content: center;
+    align-items: flex-start;
+
+
+    padding: 70px 15%;
+    /* transition: 1.0 ease; */
+}
+
+.PMCake_show {
+    min-width: 600px;
+}
+
+.PMCake_show_detail {
+    border-radius: 15px;
+    background-color: var(--YWhite);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px;
+
+    -webkit-box-shadow: 0px 0px 20px 0px var(--Brown04_BE);
+    box-shadow: 0px 0px 20px 0px var(--Brown04_BE);
+}
+
+.PMCake_show_detail_up {
+    display: flex;
+    flex-direction: row;
+
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.cakePic {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    /* background-color: aqua; */
+    margin: 0 30px 0 0;
+}
+
+.cakePic>div {
+    position: relative;
+    border-radius: 15px;
+    width: 250px;
+    height: 250px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+figcaption {
+    cursor: pointer;
+}
+
+.cakePic>div>figcaption {
+    transform: translateX(0px);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    transition: 0.1s ease-in-out;
+}
+.cakePic>div>figcaption>img{transition: 0.3s ease-in;}
+.cakePic>div>figcaption>img:hover {transform: scale(1.3);}
+
+.cakePic>div>p {
+    text-align: center;
+    position: absolute;
+    opacity: 0%;
+    background-color: rgba(240, 248, 255, 0.5);
+    width: 100%;
+    bottom: 0px;
+    z-index: 1;
+
+    transition: 0.3s ease-in;
+}
+.cakePic>div>div {
+    position: absolute;
+    width: 100%;
+    top: 110px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.cakePic>div>div>button {
+    font-family: "GenJyuuGothic-B";
+    font-size: var(--pSTitle);
+    color: var(--Brown01);
+    text-align: center;
+    border: none;
+
+
+    background-color: rgba(246, 243, 228, 0.6);
+    transition: 0.3s ease;
+    z-index: 1;
+}
+
+.cakePic>div>div>button:first-of-type {
+    border-radius: 0 5px 5px 0;
+}
+
+.cakePic>div>div>button:last-of-type {
+    border-radius: 5px 0 0 5px;
+}
+
+.cakePic>div>div>button:hover {
+    color: var(--Brown03);
+    background-color: rgba(246, 243, 228, 1);
+    cursor: pointer;
+}
+
+
+.mainPic {
+    width: 250px;
+    height: 250px;
+    background-color: var(--Brown04_BE);
+}
+
+.cakePic>div+figcaption {
+    padding: 10px 0 0 0;
+}
+
+.smallPic {
+    border-radius: 8px;
+    width: 55px;
+    height: 55px;
+    background-color: var(--Brown04_BE);
+}
+
+.cakePic+div {
+    display: flex;
+    flex-direction: column;
+}
+
+.cakename>h6 {
+    margin: 0;
+}
+
+.caketext {
+    height: 120px;
+    overflow-y: auto;
+
+    margin: 0;
+}
+
+.caketext>p {
+    margin: 0;
+}
+
+.caketext::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--Brown01);
+}
+
+.caketext::-webkit-scrollbar-thumb {
+    background: var(--Brown03);
+}
+
+.Size_Quantity_pirce {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    /* background-color: cadetblue; */
+}
+
+.Size_Quantity_pirce>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.selectQuantity>select {
+    border: 2px solid var(--Brown01);
+    border-radius: 5px;
+
+    font-family: "GenJyuuGothic-B";
+    font-size: var(--pContent);
+    color: var(--Brown01);
+    letter-spacing: 2px;
+    /* background-color: aqua; */
+}
+
+#buy {
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 5px 10px;
+
+    font-family: "GenJyuuGothic-B";
+    font-size: var(--pContent);
+    color: var(--YWhite);
+    background-color: var(--Brown01);
+    letter-spacing: 2px;
+}
+
+#buy:hover {
+    border: 2px solid var(--Brown01);
+    color: var(--Brown01);
+    background-color: var(--YWhite);
+}
+
+.selectSize>p {
+    display: inline-block;
+}
+
+.selectSize>button {
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color04);
+
+    color: var(--color01);
+    font-family: "GenJyuuGothic-L";
+    font-size: var(--pContent);
+    letter-spacing: 2px;
+}
+
+.selectSize>button:hover {
+    background-color: var(--color01);
+    color: var(--color04);
+    border: 1px solid var(--color04);
+}
+
+.selectQuantity>p {
+    display: inline-block;
+}
+
+
+
+.gotocart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
+.PMCake_show_introduce {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 0;
+    border: 3px dashed var(--Brown01);
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.PMCake_show_introduce>img {
+    width: 100%;
+
+}

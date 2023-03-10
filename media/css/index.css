@@ -1,0 +1,865 @@
+/* 字型引用 */
+@font-face {
+    font-family: 'GenSenRounded-B';
+    src: local("GenSenRounded-B"),
+        url('../Source/ttc/GenSenRounded-B.ttc') format("woff"),
+        url('../Source/ttc/GenSenRounded-B.ttc') format("opentype"),
+        url('../Source/ttc/GenSenRounded-B.ttc') format("embedded-opentype");
+}
+
+/* 色票表 */
+:root {
+    --sky: #a6dbf5;
+
+    --Green01: #368284;
+    --Green02: #628e59;
+    --Green03: #A3CF78;
+    --Green04: #87c379;
+
+    --YWhite: #F6F3E4;
+    --GWhite: #F7F8F3;
+
+    --BG_LYellow: #f0da99;
+    --BG_LOrange: #F3D1B2;
+    --BG_MOrange: #f7bc88;
+
+    --Brown01: #5c3a31;
+    --Brown02: #835B36;
+    --Brown03: #BB8058;
+
+    --Brown04_BE: #b79779;
+    --Brown05_BEtxt: #876464;
+
+    --BTN_Red: #e3344b;
+    --BTN_Green: #337e47;
+    --BTN_Yellow: #f39800;
+}
+
+/* 字型套用 */
+body {
+    font-family: GenSenRounded-B;
+    overflow-x: hidden;
+    /* color: var(--Brown03); */
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+
+
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 150px;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img_radius {
+    border-radius: 20px;
+}
+
+/* .speace_R {
+     margin-right: 80px;
+}  */
+
+.Engtitle {
+    /* color: white; */
+    font-size: 2rem;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--Brown01);
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+.h1title {
+    font-size: 3rem;
+    color: var(--Brown01);
+    margin-bottom: 50px;
+}
+
+/* ---------------回頂端----------------------- */
+.goTop.hide {
+    opacity: 0;
+    filter: Alpha(opacity=0);
+    transform: translateY(150%);
+}
+
+/* -----------------主視覺視差-------------------- */
+.keyart-container {
+    width: 100%;
+    height: 950px;
+}
+
+.keyart-layer {
+    width: 100vw;
+    height: 950px;
+    background-repeat: repeat-x;
+    position: fixed;
+    background-position: bottom center;
+    z-index: -10;
+}
+
+#parallax-0{
+    position: fixed;
+    left: 100px;
+    top: 100px;
+    z-index: -10;
+    animation: move 12s infinite linear;
+    
+}
+
+#parallax-01{
+    position: fixed;
+    left: 1500px;
+    top: 50px;
+    z-index: -10;
+    animation: move1 15s infinite linear;
+}
+
+@keyframes move {
+    0%{
+      left:100px ;
+    }
+    25% {
+      left: 50px;
+    }
+    50%{
+        left: 100px
+    }
+    75%{
+        left: 150px
+    }
+    100%{
+        left: 100px;
+    }
+  }
+
+  @keyframes move1 {
+    0%{
+      left:1500px ;
+    }
+    25% {
+      left: 1550px;
+    }
+    50%{
+        left: 1500px
+    }
+    75%{
+        left: 1450px
+    }
+    100%{
+        left: 1500px;
+    }
+  }
+
+
+#parallax-1 {
+   background-color: #A7E4FF;
+}
+
+#parallax-2 {
+    background-image: url(../Source/IMG/Key-Vision/title.png);
+}
+
+#parallax-3 {
+    background-image: url(../Source/IMG/Key-Vision/M_middle.png);
+}
+
+#parallax-4 {
+    background-image: url(../Source/IMG/Key-Vision/cake.png);
+}
+
+#parallax-5 {
+    background-image: url(../Source/IMG/Key-Vision/T.png);
+}
+
+#parallax-6 {
+    background-image: url(../Source/IMG/Key-Vision/train_ex.png);
+    animation: mainmove 3.5s linear forwards;
+    background-repeat: no-repeat;
+}
+
+@keyframes mainmove {
+    0% {
+        right: -1500px;
+    }
+
+    100% {
+        right: -100px;
+        animation-timing-function: cubic-bezier(1, .63, 0, 1.03)
+    }
+}
+
+/* ---------------------nav----------------------- */
+nav {
+    width: 100vw;
+    position: fixed;
+    top: 0px;
+    margin: 0;
+
+
+
+    display: flex;
+    flex-direction: row;
+    z-index: 4;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 100px 10px 40px;
+    transition: 1.0 ease;
+
+    background-color: hsla(0, 0%, 100%, 0.5);
+
+    color: var(--Brown02);
+    letter-spacing: 2px;
+}
+
+nav>div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+nav>div img {
+    height: 50px;
+    margin: 0 20px 0 0;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav>div:first-of-type>a>p {
+    font-size: 1.4em;
+    margin: 0;
+    color: var(--Brown01);
+}
+
+nav>#navlist>a>p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-size: 1.2em;
+    color: var(--Brown01);
+}
+
+#navlist {
+    min-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 100px 0 0;
+}
+
+#navlist svg {
+    width: fit-content;
+    height: fit-content;
+    color: var(--Brown01);
+}
+
+/*線段hover功能*/
+nav>div#navlist>a:after,
+nav>div>a>p:after {
+    display: block;
+    content: '';
+    border-bottom: solid 2px var(--Brown01);
+    transform: scaleX(0);
+    transform-origin: 0%;
+    transition: transform 250ms ease-in-out;
+}
+
+nav>div#navlist>a:hover:after,
+nav>div>a>p:hover:after {
+    transform: scaleX(1);
+}
+/* ------------------------------------------- */
+
+#Btnlist {
+    position: fixed;
+    right: 0;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+}
+
+.mainbtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    margin: 5px 0;
+}
+
+#Btnlist div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease-in-out;
+}
+
+#Line {
+    background-color: #198754;
+    color: white;
+    border: 3px solid transparent;
+}
+
+#Line:hover {
+    background-color: white;
+    color: #198754;
+    border: 3px solid #198754;
+}
+
+#Email {
+    background-color: #dc3545;
+    color: white;
+    border: 3px solid transparent;
+}
+
+#Email:hover {
+    background-color: white;
+    color: #dc3545;
+    border: 3px solid #dc3545;
+}
+
+#goTop {
+    background-color: #6c757d;
+    color: white;
+    border: 3px solid transparent;
+}
+
+#goTop:hover {
+    background-color: white;
+    color: #6c757d;
+    border: 3px solid #6c757d;
+}
+
+section {
+    background-color: #fff1c5;
+    /* width: 100vw; */
+}
+
+/* ------LINE彈跳視窗------------------------------- */
+
+#LINE_QR {
+    position: fixed;
+    right: 60px;
+    bottom: 180px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    border-radius: 10px;
+    z-index: 99;
+    visibility: hidden;
+}
+
+#LINE_QR>div {
+    background-color: #07B53B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+
+
+}
+
+#LINE_QR>div>svg {
+    color: #fff;
+    padding: 15px;
+}
+
+#LINE_QR>img {
+    width: 8vw;
+    padding-top: 20px;
+}
+
+#LINE_QR>p {
+    font-size: 1rem;
+    padding: 20px;
+
+}
+
+/* ---------------NEWS----------------- */
+.swiper {
+    width: 100%;
+    height: 800px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+.autoplay-progress {
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--swiper-theme-color);
+    visibility: hidden;
+}
+
+.autoplay-progress svg {
+    --progress: 0;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    stroke-width: 4px;
+    stroke: var(--swiper-theme-color);
+    fill: none;
+    stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+    stroke-dasharray: 125.6;
+    transform: rotate(-90deg);
+}
+
+#btn_next,
+#btn_prev {
+    color: #fff;
+}
+
+.news {
+    display: flex;
+    flex-direction: row;
+    /* height: 150px; */
+    padding: 0px 20px 0px 0px;
+    background-color: var(--YWhite);
+    border-radius: 10px;
+    width: 25vw;
+}
+
+.news>div {
+    padding: 0 20px 30px 0px;
+}
+
+.news>img {
+    border-radius: 10px 0 0 10px;
+    width: 10vw;
+}
+
+.multiple-items {
+    width: 100%;
+}
+
+#newscard,
+#newscard1,
+#newscard2,
+#newscard3 {
+    display: flex;
+    color: var(--Brown01);
+}
+
+#newscard>img,
+#newscard1>img,
+#newscard2>img,
+#newscard3>img {
+    margin-right: 20px;
+}
+
+#News_card {
+    height: 200px;
+}
+
+/* -------------parallax----------------- */
+#parallax {
+    overflow: hidden;
+    z-index: -5;
+    height: 500px;
+    position: relative;
+    width: 100vw;
+
+}
+
+#parallax_img {
+    position: absolute;
+    top: -200px;
+    background-image: url(../Source/IMG/parallax1.png);
+    background-size: 100% auto;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100%;
+    transition: transform 0.7s ease-out;
+    height: 1000px;
+    z-index: -5;
+
+}
+
+/* ------------------文字跑馬燈---------------------- */
+#marquee_TContaner {
+    position: absolute;
+    bottom: 0;
+}
+
+.box_T {
+    position: relative;
+    width: 100vw;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list_T {
+    left: 0px;
+    display: flex;
+    position: absolute;
+}
+
+#marquee_T span {
+    color: transparent;
+    /* -webkit-text-stroke: 1px rgb(255, 255, 255); */
+    color: #147369;
+    font-size: 6rem;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+}
+
+/* ---------about--------------------- */
+#About {
+    position: relative;
+}
+
+#about_T {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--Brown01);
+}
+
+#about_T>img {
+    margin-bottom: 50px;
+    width: 40vw;
+}
+
+#about_T>img:nth-child(2) {
+    width: 15vw;
+}
+
+#rabbit1 {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    /* rotate: 30deg; */
+    /* animation: rotate1 0.5s linear infinite alternate; */
+    width: 20vw;
+}
+
+#rabbit2 {
+    position: absolute;
+    bottom: 100px;
+    right: 20px;
+    width: 20vw;
+    /* rotate: -45deg; */
+    /* animation: rotate2 0.6s linear infinite alternate; */
+
+}
+
+#rabbit3 {
+    position: absolute;
+   bottom: 0px;
+    left: 15px;
+    width: 15vw;
+}
+
+#fruit_st{
+    position: absolute;
+   top:80px;
+    right: 250px;
+   
+}
+
+#fruit_sth{
+    position: absolute;
+    top:280px;
+     right: 150px;
+     /* width: 10vw;   */
+}
+
+#LoveMeg{
+    position: absolute;
+    bottom: 500px;
+     right: 250px;
+     width: 10vw;
+     width: 8vw;
+
+}
+
+#SmileMeg{
+    position: absolute;
+    bottom: 280px;
+    left: 250px;
+    width: 5vw;
+}
+
+#fruit_org{
+    position: absolute;
+    left: 250px;
+    top: 550px;
+
+}
+
+#fruit_orgh{
+    position: absolute;
+    left: 100px;
+    top: 700px;
+    
+}
+
+/* @keyframes rotate1 {
+    0% {
+        transform: rotate(30deg);
+    }
+
+    50% {
+        transform: rotate(30deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes rotate2 {
+    0% {
+        transform: rotate(-45deg);
+    }
+
+    50% {
+        transform: rotate(-45deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+} */
+
+
+/* -----------------主題蛋糕-------------------- */
+#mcake>img {
+    width: 30vw;
+}
+
+#Product_M>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85vw;
+}
+
+#mcake>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 35vw;
+}
+
+#mcake div {
+    text-align: center;
+    margin: 20px;
+    color: var(--Brown01);
+    font-size: 1.2rem;
+}
+
+#mcake div img {
+    width: 250px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#mcake>div img:hover {
+    transform: scale(1.1) translateY(-5px);
+
+}
+
+/* --------------客製-------------------*/
+#hcake {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85vw;
+    margin: 20px;
+    color: var(--Brown01);
+}
+
+#hcake>img {
+    width: 30vw;
+}
+
+#hcake>div {
+    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+
+#hcake div img {
+    width: 250px;
+    margin: 30px 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#hcake div img:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+#hcake div>span {
+    padding: 0 30px;
+    color: var(--color);
+    width: 30vw;
+}
+
+#btn_buy {
+    background-color: var(--Green03);
+    width: 10vw;
+    border-radius: 20px;
+    transition: background-color 0.3s ease-in-out;
+    margin-top:30px ;
+}
+
+#btn_buy:hover{
+    background-color: var(--BTN_Red);
+}
+
+#btn_buy>div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    text-align: center;
+    color: var(--YWhite);
+    margin: 7px;
+    border: 4px dotted #fff;
+    padding: 15px;
+
+
+}
+
+#btn_buy a{
+    text-decoration: none;
+    color: var(--GWhite);
+}
+
+/* -------------------------------------------- */
+#Contact {
+    position: relative;
+    width: 100vw;
+    min-width: 1440px;
+    height: 750px;
+    background-image: url(../Source/IMG/Key-Vision/middle_long.png);
+    background-position: top;
+    background-size: 70%;
+    background-repeat: repeat-x;
+    z-index: 10;
+    color: var(--YWhite);
+}
+
+#Contact>div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* ---------------跑馬燈----------------- */
+.box {
+    position: relative;
+    width: 100vw;
+    height: 350px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.list {
+    left: 0px;
+    display: flex;
+    position: absolute;
+}
+
+.photo {
+    width: 300px;
+    height: 300px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footerLogo {
+    margin-right: 30px;
+}
+
+
+#icon>div>a>img {
+    width: 50px;
+    margin: 0px 5px;
+}
+
+#icon>div {
+    margin: 20px 0px;
+}
+
+iframe {
+    margin: 50px;
+    border-radius: 10px;
+}
+
+/* 
+*{
+border: 4px solid red;
+} */

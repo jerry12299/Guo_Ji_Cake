@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="css/main_ginnychen19.css">
+    <link rel="stylesheet" href="css/BEndOrder.css">
+    <link rel="stylesheet" href="css/customer.css">
+    <link rel="stylesheet" href="css/addCakePic.css">
+    <title>菓季後台-新增商品</title>
+</head>
+
+<body>
+    <dialog class="ShowMSG">
+        <div class="animate-zoom">
+            <div>
+                <h6 class="animated ani_infinite">X</h6>
+            </div>
+            <div>
+                <h6 class="msg"></h6>
+                <img class="animated ani_infinite pulse" src="">
+            </div>
+        </div>
+    </dialog>
+    <div id="BEndleft">
+        <div class="BEndnav">
+            <div>
+                <img src="../Source/IMG/Logo.png">
+                <h6>後臺管理系統</h6>
+                <p>使用者：abuser</p>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <img src="../Source/SVG/commodity_cake.svg">
+                        <h6>商品管理</h6>
+                    </div>
+                    <p1><a href="/commodity">商品列表</a></p1>
+                    <!-- <p1><a href="/addimg">商品圖片</a></p1> -->
+                    <p1><a href="/additem">新增商品</a></p1>
+                </div>
+                <div>
+                    <div>
+                        <img src="../Source/SVG/order.svg">
+                        <h6>訂單管理</h6>
+                    </div>
+                    <p1><a href="/C05_2/1">一般訂單</a></p1>
+                    <p1><a href="/C05_3/1">客製訂單</a></p1>
+                </div>
+                <div>
+                    <div>
+                        <img src="../Source/SVG/member.svg">
+                        <h6>會員相關</h6>
+                    </div>
+                    <p1><a href="/manage">會員資料</a></p1>
+                </div>
+                <form action="/logout">
+                    <input type="submit" value="登出">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="BEndright">
+        <div id="PMcakeOrder">
+            <div>
+                <h6>新增商品</h6>
+                <!-- <div class="search-container">
+                    <input type="button" class="search-icon"></input>
+                    <input type="text" class="search-input" placeholder="Search...">
+                </div> -->
+            </div>
+            <table class="Order">
+                <thead>
+                    <tr>
+                        <td id="title" class="">
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="detail">
+                        <td colspan="8">
+                            <div class="customer">
+                                <form id='newCake' enctype="multipart/form-data">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>蛋糕ID：</td>
+                                                <td>
+
+                                                    <input type="text" name="c_id" id="c_id" value="cake0601"
+                                                        onchange="doChange()">
+                                                    <span id="newId"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>蛋糕名稱：</td>
+                                                <td><input type="text" name="c_name" value='測試用蛋糕' required></td>
+                                            </tr>
+                                            <tr>
+                                                <td>價格：</td>
+                                                <td><input type="number" name="price" value="600" required></td>
+                                            </tr>
+                                            <tr>
+                                                <td>類別：</td>
+                                                <td>
+                                                    <!-- <input type="text" value="1" name="c_class"> -->
+                                                    <select name="c_class">
+                                                        <option value="0" selected>當月季節主打</option>
+                                                        <option value="1">彌月蛋糕</option>
+                                                        <option value="2">重乳酪</option>
+                                                        <option value="3">生乳捲</option>
+                                                        <option value="4">配件區</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+
+                                            <tr>
+                                                <td>文案：</td>
+                                                <td>
+                                                    <textarea style="resize:none;width:500px;height:150px;"
+                                                        name="illustrate" required>測試用文案</textarea>
+
+
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+                                    <div class="pic">
+                                        <table>
+                                            <tr>
+                                                <td>介紹圖片:</td>
+                                                <td>
+                                                    <input type="file" name="img" id="img0" accept="image/*">
+                                                    <input type="button" class="btn_red" onclick="doUpImg(0)"
+                                                        value="上傳圖片">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>主要大圖：</td>
+                                                <td>
+                                                    <input type="file" name="img" id="img1" accept="image/*">
+                                                    <input type="button" class="btn_red" onclick="doUpImg(1)"
+                                                        value="上傳圖片">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>詳細縮圖01：</td>
+                                                <td><input type="file" name="img" id="img2" accept="image/*">
+                                                    <input type="button" class="btn_red" onclick="doUpImg(2)"
+                                                        value="上傳圖片">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>詳細縮圖02：</td>
+                                                <td><input type="file" name="img" id="img3" accept="image/*">
+                                                    <input type="button" class="btn_red" onclick="doUpImg(3)"
+                                                        value="上傳圖片">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>詳細縮圖03：</td>
+                                                <td><input type="file" name="img" id="img4" accept="image/*">
+                                                    <input type="button" class="btn_red" onclick="doUpImg(4)"
+                                                        value="上傳圖片">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>詳細縮圖04：</td>
+                                                <td><input type="file" name="img" id="img5" accept="image/*">
+                                                    <input type="button" class="btn_red" onclick="doUpImg(5)"
+                                                        value="上傳圖片">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ul>
+                                            <p>圖片名稱：</p>
+
+
+
+                                            <li>介紹圖片 &nbsp; &nbsp; &nbsp;<input type="text" readonly style="width:20em;"
+                                                    id="img_0" name="img_name"></li>
+
+
+
+                                            <li>主要大圖 &nbsp; &nbsp; &nbsp;<input name="img1" id="img_1" type="text"
+                                                    style="width:20em;" readonly></li>
+
+                                            <li>詳細縮圖01 <input name="img2" id="img_2" type="text" style="width:20em;"
+                                                    readonly></li>
+
+                                            <li>詳細縮圖02 <input name="img3" id="img_3" type="text" style="width:20em;"
+                                                    readonly></li>
+
+                                            <li>詳細縮圖03 <input name="img4" id="img_4" type="text" style="width:20em;"
+                                                    readonly></li>
+
+                                            <li>詳細縮圖04 <input name="img5" id="img_5" type="text" style="width:20em;"
+                                                    readonly></li>
+
+
+                                        </ul>
+                                    </div>
+
+                                    <div style="padding: 10px;
+                                    display: flex;
+                                    justify-content: flex-end;">
+
+                                        <input type="button" onclick="doUpdata()" value="新增資料">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tfoot>
+
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <!-- <script src="js/BEndOrder.js"></script> -->
+    <script src="js/findNav.js"></script>
+    <script>
+        class ShowDialog {
+            constructor() {
+                this.showDialog_BEnd = $('.ShowMSG');
+                this.img = this.showDialog_BEnd.children().children().eq(1).find("img");
+                this.h6 = this.showDialog_BEnd.children().children().eq(1).find("h6");
+            }
+
+            show(imgUrl, msg) {
+                this.showDialog_BEnd.css({ display: "flex", });
+                this.img.attr('src', imgUrl);
+                this.h6.html(msg);
+            }
+
+            /* 任意點擊關閉浮窗 */
+            onClickOutside(Needlocation = true) {
+                const self = this; // 保存当前上下文
+                this.showDialog_BEnd.on("click", function (a) {
+                    // console.log(a.target);
+                    if ($(a.target).is("div") || $(a.target).is("img") || $(a.target).is("h6.msg")) {
+                        return;
+                    } else {
+                        if (Needlocation) {
+                            location.href = '/commodity';
+                        } else {
+                            self.showDialog_BEnd.css({ display: "none", });
+                        }
+                    }
+                })
+                if (location) {
+                    setTimeout(() => { location.href = '/commodity'; }, 5000);
+                }
+            }
+        }
+
+        function doChange() {  //檢查id是否重複
+            var cakeId = { c_id: $('#c_id').val() }
+
+            $.ajax({
+                url: "/cakeId", //cake.js 的註冊頁 
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(cakeId),
+                success: function (res) {
+                    if (parseInt(res)) {
+                        $('#newId').text('OK')
+
+                    } else {
+                        $('#newId').text('ID重複')
+
+                    }
+                },
+                error: function () {
+                    alert("系統錯誤!");
+                }
+            })
+
+        }
+
+
+
+        function doUpdata() {  //更新
+            var cakeId = { c_id: $('#c_id').val() }
+
+            $.ajax({
+                url: "/cakeId", //cake.js 的註冊頁 
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(cakeId),
+                success: function (res) {  //先判斷是否重複
+                    if (parseInt(res)) {   //沒重複再繼續
+                        var data = $('#newCake').serializeArray();
+
+                        var JSONData = {};
+                        for (index in data) {
+                            JSONData[data[index].name] = data[index].value;
+                        }
+
+                        // console.log(JSONData)
+                        $.ajax({
+                            url: "/additem",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(JSONData),
+                            success: function (res) {
+                                // alert(res);
+                                // // location.href = '/';
+                                // $('#title').addClass("updateOK");
+                                // $('#title').text('新增成功!');
+                                const dialog = new ShowDialog();
+                                dialog.show("../Source/IMG/rabbit.png", "新增成功");
+                                dialog.onClickOutside();
+                            },
+                            error: function () {
+                                const dialog = new ShowDialog();
+                                dialog.show("../Source/IMG/Key-Vision/Rabbit_NO.png", "新增失敗");
+                                dialog.onClickOutside();
+                            }
+                        })
+
+                    } else {
+                        $('#newId').text('ID重複')
+                        const dialog = new ShowDialog();
+                        dialog.show("../Source/IMG/Key-Vision/Rabbit_NO.png", "id<br>重複");
+                        dialog.onClickOutside();
+
+                    }
+                },
+                error: function () {
+                    const dialog = new ShowDialog();
+                    dialog.show("../Source/IMG/Key-Vision/Rabbit_NO.png", "系統錯誤");
+                    dialog.onClickOutside(false);
+                    alert("系統錯誤!");
+                }
+            })
+
+
+        }
+
+        function doUpImg(id) {
+            let file = $('#img' + id)[0].files[0];
+            console.log(file)
+            let formData = new FormData();
+            formData.append("img", file);
+            $.ajax({
+                url: "/upimg",
+                type: "POST",
+                // contentType: "application/json; charset=utf-8",
+                contentType: false,
+                processData: false,
+                // data: JSON.stringify(JSONData),
+                data: formData,
+                success: function (res) {
+                    // const dialog = new ShowDialog();
+                    // dialog.show("../Source/IMG/rabbit.png",res);
+                    // dialog.onClickOutside(false);
+                    $('#img_' + id).val(res);
+                    //  location.href = '/';
+                },
+                error: function () {
+                    // const dialog = new ShowDialog();
+                    // dialog.show("../Source/IMG/Key-Vision/Rabbit_NO.png", "系統錯誤");
+                    // dialog.onClickOutside(false);
+                    alert("login 系統錯誤!")
+                }
+            })
+
+        }
+    </script>
+</body>
+
+</html>

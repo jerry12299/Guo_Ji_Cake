@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/main_ginnychen19.css">
+    <link rel="stylesheet" href="../../../css/BEndOrder.css">
+    <script src="../../../js/jquery-3.6.0.js"></script>
+
+</head>
+
+<body>
+    <div id="BEndleft">
+        <div class="BEndnav">
+            <div>
+                <img src="../../../Source/IMG/Logo.png">
+                
+                <h6>後臺管理系統</h6>
+                <p>使用者：abuser</p>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <img src="../../../Source/SVG/commodity_cake.svg">
+                        <h6>商品管理</h6>
+                    </div>
+                    <p1><a href="/commodity">商品列表</a></p1>
+                    <p1><a href="/additem">新增商品</a></p1>
+                </div>
+                <div>
+                    <div>
+                        <img src="../../../Source/SVG/order.svg">
+                        <h6>訂單管理</h6>
+                    </div>
+                    <p1><a href="/C05_2/1">一般訂單</a></p1>
+                    <p1><a href="/C05_3/1">客製訂單</a></p1>
+                </div>
+                <div>
+                    <div>
+                        <img src="../../../Source/SVG/member.svg">
+                        <h6>會員相關</h6>
+                    </div>
+                    <p1><a href="/manage">會員資料</a></p1>
+                </div>
+                <form action="/logout">
+                    <input type="submit" value="登出">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="BEndright">
+        <div id="PMcakeOrder">
+            <div>
+                <h6>一般訂單</h6>
+                <div class="search-container">
+                    <input type="button" class="search-icon"></input>
+                    <input type="text" class="search-input" placeholder="Search...">
+                </div>
+            </div>
+            <table class="Order">
+                <thead>
+                    <tr>
+                        <td>訂單編號</td>
+                        <td>會員姓名</td>
+                        <td>金額</td>
+                        <td>詳情</td>
+                        <td>成立時間 ▲</td>
+                        <td>預約時間 ▲</td>
+                        <td>
+                            <select onchange="doSearch('co_state',this.value)" name="???????">
+                                <option selected="selected">訂單狀態</option>
+                                <option value="1">未製作</option>
+                                <option value="2">已製作</option>
+                                <option value="3">申請取消</option>
+                                <option value="4">已取消</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select onchange="doSearch('pay_state',this.value)" name="???????">
+                                <option selected="selected">付款狀態</option>
+                                <option value="5">未付款</option>
+                                <option value="6">已付款</option>
+                                <option value="7">已退款</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select onchange="doSearch('shipping',this.value)" name="???????">
+                                <option selected="selected">出貨狀態</option>
+                                <option value="8">未配送</option>
+                                <option value="9">已配送</option>
+                                <option value="10">未取貨</option>
+                                <option value="11">已取貨</option>
+                                <option value="12">已取消</option>
+                            </select>
+                        </td>
+                        
+                    </tr>
+                </thead>
+                <% data.forEach((item ,index) => { %>
+                    <% var upYY = item.co_upload_date.getFullYear()%>
+                    <% var upMM = (item.co_upload_date.getMonth())+1%>
+                    <% var upDD = item.co_upload_date.getDate()%>
+                    <% var upHr = item.co_upload_date.getHours()%>
+                    <% var upMi = item.co_upload_date.getMinutes()%>
+                    <% var puYY = item.pick_up_date.getFullYear()%>
+                    <% var puMM = (item.pick_up_date.getMonth())+1%>
+                    <% var puDD = item.pick_up_date.getDate()%>
+                    <% var puHr = item.pick_up_date.getHours()%>
+                    <% var puMi = item.pick_up_date.getMinutes()%>
+                <tbody>
+                    <tr class="list">
+                        <td>#<%= item.o_id%></td>
+                        <td><%= item.m_name%></td>
+                        <td>NT.<%= item.order_total%></td>
+                        <td><button>詳細</button></td>
+                        <td><%= `${upYY}年${upMM}月${upDD}日${upHr}時${upMi}分` %></td>
+                        <td><%= `${puYY}年${puMM}月${puDD}日${puHr}時${puMi}分` %></td>
+                        <td><%= item.co_state%></td>
+                        <td><%= item.pay_state%></td>
+                        <td><%= item.shipping%></td>
+                    </tr>
+                    <tr class="detail">
+                        <td colspan="9">
+                            <div>
+                                <div class="items">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td>訂購內容</td>
+                                                <td>單價</td>
+                                                <td>小計</td>
+                                            </tr>
+                                        </thead>
+                                        <!-- 迴圈{ -->
+                                        <% order_D.forEach((o_item ,index) => { %>    
+                                            <% if(item.o_id===o_item.o_id){  %>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                       <%= o_item.c_name%>
+                                                        <div class="itemsSizeFlavorCount">
+                                                            <!-- <div>F</div>
+                                                            <div>葡萄</div> -->
+                                                            <div>x<%= o_item.quantity %></div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><%= o_item.price%></td>
+                                                <td><%= o_item.total%></td>
+                                            </tr>
+                                        </tbody>
+                                        <% }%>
+                                        <% }) %>
+                                        <!--  }-->
+                                    </table>
+                                </div>
+                                <div class="contact">
+                                    <table class="contactLeft">
+                                        <tr>
+                                            <td>連絡電話</td>
+                                            <td><%= item.phone %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>電子信箱</td>
+                                            <td><%= item.email %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>付款方式</td>
+                                            <td><%= item.payment %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>取貨方式</td>
+                                            <td><%= item.pickup_method%><br>地址:<%= item.rec_address%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>取貨時間</td>
+                                            <td><%= `${puHr}時` %></td>
+                                        </tr>
+                                    </table>
+                                    <table class="contactRight">
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <select onchange= 'doChange("co_state",this.value,<%= item.o_id %>)' name="???????">
+                                                        <option selected="selected">訂單狀態</option>
+                                                        <option value="未製作">未製作</option>
+                                                        <option value="已製作">已製作</option>
+                                                        <option value="申請取消">申請取消</option>
+                                                        <option value="已取消">已取消</option>
+                                                    </select>
+                                                
+                                                    <select onchange= 'doChange("pay_state",this.value,<%= item.o_id %>)' name="???????">
+                                                        <option  selected="selected">付款狀態</option>
+                                                        <option value="未付款">未付款</option>
+                                                        <option value="已付款">已付款</option>
+                                                        <option value="已退款">已退款</option>
+                                                    </select>
+                                            
+                                                    <select onchange= 'doChange("shipping",this.value,<%= item.o_id %>)' name="???????">
+                                                        <option selected="selected">出貨狀態</option>
+                                                        <option value="未配送">未配送</option>
+                                                        <option value="已配送">已配送</option>
+                                                        <option value="未取貨">未取貨</option>
+                                                        <option value="已取貨">已取貨</option>
+                                                        <option value="已取消">已取消</option>
+                                                    </select>
+                                                    
+                                                   
+                                                </div>
+                                            
+                                            
+                                            </td>
+                                            <!-- <td>
+                                                
+                                                <div>取貨備註
+                                                    <div>(若是非勾同收件人，則把內容存進這裡取貨備註欄裡)無備註</div>
+                                                </div>
+                                            </td> -->
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>訂單與取貨備註
+                                                    <div><%= item.remark%></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <% }) %>
+          
+                <tfoot>
+
+                    <tr>
+                        <td colspan="9">
+                            <div>
+
+                                <div>
+                                    <a href="/C05_2/1"><button>最前頁</button></a>
+                                    <a href="/C05_2/<%= parseInt(curr_page)-1 %>"><button>上一頁</button></a>
+                                    <div id="pageList">
+                                        <% for(var i = 1; i <= last_page; i++) { %>
+                                            <p ><a href="/C05_2/<%= i%>"><%= i%></a></p>
+                                            <% } %>
+                                        
+                                    </div>
+                                    <a href="/C05_2/<%= parseInt(curr_page)+1 %>"><button>下一頁</button></a>
+                                    <a href="/C05_2/<%= last_page%>"><button>最尾頁</button></a>
+                                </div>
+                                <div>
+                                    <p>總數 <%= total_nums%> 筆，共 <%= curr_page%>/<%= last_page%> 頁</p>
+                                  
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <script src="../../../js/BEndOrder.js"></script>
+    <script src="../../../js/findNav.js"></script>
+    <script>
+        function doChange(str,val,id){
+            var JSONData = {
+                dbName:str,          //要改的欄位
+                value:val,           //要改的內容
+                o_id:id              //要改的編號
+            }
+
+            $.ajax({
+                 url: "/change",
+                 type: "POST", 
+                 contentType: "application/json; charset=utf-8",
+                 data: JSON.stringify(JSONData),
+                 success: function(res) {
+                    //  alert("ok");
+                     location = '/C05_2/1'
+                    // doAjax ();
+                    
+                 
+                 },
+                 error: function() {
+                     alert("系統錯誤!")
+                 }
+             }) 
+        }
+
+        function doSearch(who,value){
+            location = '/C05_2_1/'+who+'/'+value+'/1'
+            // var JSONData = {name:who,value:value}
+            // $.ajax({
+            //      url: "/search",
+            //      type: "POST", 
+            //      contentType: "application/json; charset=utf-8",
+            //      data: JSON.stringify(JSONData),
+            //      success: function(res) {
+            //          alert("ok");
+            //          console.log(res)
+            //         //  location = '/C05_2/1'
+            //         // doAjax ();
+                    
+                 
+            //      },
+            //      error: function() {
+            //          alert("系統錯誤!")
+            //      }
+            //  }) 
+        }
+
+          
+        
+    </script>
+
+</body>
+
+</html>

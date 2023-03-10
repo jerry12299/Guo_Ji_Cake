@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/password.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/08-14.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!-- <link rel="stylesheet" href="css/main_ginnychen19.css"> -->
+    <!-- <link rel="stylesheet" href="css/BEndOrder.css"> -->
+    <title>菓季-會員修改</title>
+    <style>
+        /* 字型引用 */
+        @font-face {
+            font-family: 'GenSenRounded-B';
+            src: local("GenSenRounded-B"),
+                url('../Source/ttc/GenSenRounded-B.ttc') format("woff"),
+                url('../Source/ttc/GenSenRounded-B.ttc') format("opentype"),
+                url('../Source/ttc/GenSenRounded-B.ttc') format("embedded-opentype");
+        }
+
+        /* 色票表 */
+        :root {
+            --sky: #a6dbf5;
+
+            --Green01: #368284;
+            --Green02: #628e59;
+            --Green03: #fff1c5;
+            --Green04: #87c379;
+
+            --YWhite: #F6F3E4;
+            --GWhite: #F7F8F3;
+
+            --BG_LYellow: #f0da99;
+            --BG_LOrange: #F3D1B2;
+            --BG_MOrange: #f7bc88;
+
+            --Brown01: #5c3a31;
+            --Brown02: #835B36;
+            --Brown03: #BB8058;
+
+            --Brown04_BE: #b79779;
+            --Brown05_BEtxt: #876464;
+
+            --BTN_Red: #e3344b;
+            --BTN_Green: #337e47;
+            --BTN_Yellow: #f39800;
+        }
+
+        /* 字型套用 */
+        body {
+            font-family: GenSenRounded-B !important;
+            background-color: var(--Green03);
+        }
+
+        nav {
+            width: 100vw;
+            position: fixed;
+            top: 0px;
+            margin: 0;
+
+
+
+            display: flex;
+            flex-direction: row;
+            z-index: 4;
+
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 10px 100px 10px 40px;
+            transition: 1.0 ease;
+
+            background-color: hsla(0, 0%, 100%, 0.5);
+
+            color: var(--Brown02);
+            letter-spacing: 2px;
+        }
+
+        nav>div:first-of-type {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav>div img {
+            height: 50px;
+            margin: 0 20px 0 0;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        nav>div:first-of-type>a>p {
+            font-size: 1.4em;
+            margin: 0;
+            color: var(--Brown01);
+        }
+
+        nav>#navlist>a>p {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-size: 1.2em;
+            color: var(--Brown01);
+        }
+
+        #navlist {
+            min-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 100px 0 0;
+        }
+
+        #navlist svg {
+            width: fit-content;
+            height: fit-content;
+            color: var(--Brown01);
+        }
+
+        /*線段hover功能*/
+        nav>div#navlist>a:after,
+        nav>div>a>p:after {
+            display: block;
+            content: '';
+            border-bottom: solid 2px var(--Brown01);
+            transform: scaleX(0);
+            transform-origin: 0%;
+            transition: transform 250ms ease-in-out;
+        }
+
+        nav>div#navlist>a:hover:after,
+        nav>div>a>p:hover:after {
+            transform: scaleX(1);
+        }
+
+        /* ----------------AD----------------- */ 
+        .Our-newAD {
+            position: relative;
+            z-index: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 70px 0 0 0;
+            margin: 0px 0 0 0;
+            /* transition: 1.0 ease; */
+            overflow: hidden;
+            /* margin-top: 30px    ; */
+
+        }
+
+        .Our-newAD>div {
+            width: 100vw;
+        }
+
+        .swiper {
+            width: 100vw;
+            height: 400px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .autoplay-progress {
+            bottom: 0px;
+            z-index: 10;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--swiper-theme-color);
+            visibility: hidden;
+
+            background-color: #0061f3;
+        }
+
+        .autoplay-progress svg {
+            --progress: 0;
+            position: absolute;
+            left: 0;
+            top: 0px;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            stroke-width: 10px;
+            stroke: var(--swiper-theme-color);
+            fill: var(--GWhite);
+            stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+            stroke-dasharray: 125.6;
+            transform: rotate(-90deg);
+        }
+
+        #btn_next,
+        #btn_prev {
+            color: #fff;
+        }
+
+        /* ----------------------------------------- */
+
+        /* ----------------------------------------- */
+        #footer>img {
+            width: 100vw;
+        }
+
+        footer {
+            position: relative;
+            width: 100%;
+            min-width: 1440px;
+            background-image: url(../Source/IMG/Key-Vision/middle_long.png);
+            background-position: top;
+            background-size: 60%;
+            background-repeat: repeat-x;
+            z-index: 3;
+            height: 600px;
+            color: var(--GWhite);
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 30px 0px 30px;
+            color: var(--YWhite);
+        }
+
+        #icon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #icon>div {
+            margin: 50px;
+        }
+
+        #icon a>img {
+            width: 50px;
+            margin: 0 10px;
+        }
+
+        .team_leader input{
+            margin-top: 15px;
+            font-size: 30px;
+            margin-left: 280px;
+            background-color:  #87c379;
+            border: none;
+            border-radius: 5px 5px 5px 5px;
+            color: white;
+        }
+        .team_leader input:hover{
+            background-color: rgb(240, 237, 237);
+            color: #d6b290;
+        } 
+    </style>
+</head>
+
+<body>
+    <!-- nav-->
+    <nav>
+        <div>
+            <a href="/"><img src="../Source/IMG/Logo.png" alt="Logo"></a>
+            <a href="/">
+                <p>菓季</p>
+            </a>
+        </div>
+        <div id="navlist">
+            <a href="/C01/0">
+                <p>主題蛋糕</p>
+            </a>
+            <a href="/C02">
+                <p>客製蛋糕</p>
+            </a>
+            <a href="/C03">
+                <p>餡料食材介紹</p>
+            </a>
+            <a href="/C04">
+                <p>常見問題</p>
+            </a>
+            <% if(!session.user) { %>
+                <a href="/C05"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                    </svg></a>
+                <% }else if(session.user.rights){%>
+                    <a href="/C05_2/1"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                            fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                        </svg></a>
+                    <%}else{%>
+                        <a href="/C05_4/1"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                            </svg></a>
+                        <%}%>
+                            <a href="/C06"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                    fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg></a>
+        </div>
+    </nav>
+
+    <!-- 預留固定輪播的位置 -->
+    <div class="Our-newAD">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="../Source/IMG/ad1.png" alt=""></div>
+                <div class="swiper-slide"><img src="../Source/IMG/ad2.png" alt=""></div>
+                <div class="swiper-slide"><img src="../Source/IMG/ad3.png" alt=""></div>
+            </div>
+
+            <div id="btn_next" class="swiper-button-next"></div>
+            <div id="btn_prev" class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+            <div class="autoplay-progress">
+                <svg viewBox="0 0 48 48">
+                    <circle cx="24" cy="24" r="20"></circle>
+                </svg>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="memberbgcolor">
+        <div class="profilnav">
+            <ul>
+                <a href="/C05_4_1" class="profilnav_bottom">
+                    <li>會員資訊</li>
+                </a>
+                <a href="/C05_4/1">
+                    <li>一般訂單</li>
+                </a>
+                <a href="/C05_4_2/1">
+                    <li>客製訂單</li>
+                </a>
+                <form action="/logout" class="team_leader">
+                    <input type="submit" value="登出" >
+                </form>
+            </ul>
+        </div>
+        <% var YY=data.birthday.getFullYear().toString()%>
+            <% var MM=(data.birthday.getMonth()+1).toString().padStart(2,'0')%>
+                <% var DD=data.birthday.getDate().toString().padStart(2,'0')%>
+                    <% var BD=YY+'-' + MM + '-' +DD %>
+                        <form id="member" class="profileparea">
+                            <div class="profilnumberarea">
+                                <label for="">會員編號 #</label>
+                                <input type="text" value=<%=data.m_id %> readonly>
+                            </div>
+                            <div class="profilemailarea">
+                                <label for="">EMAIL</label>
+                                <input type="email" id="mail" value=<%=data.email %> readonly placeholder="Email為帳號"
+                                required>
+                            </div>
+                            <!-- <div class="profilpasswordarea">
+             <label for="">舊密碼</label>
+             <input id="oldpwd" type="password" name="oldpwd"  required>
+         </div> -->
+                            <div class="profilpasswordarea">
+                                <label for="">新密碼</label>
+                                <input type="password" id="pwd" name="pwd" method="post" required>
+                            </div>
+                            <div class="profilpassword2area">
+                                <label for="">確認新密碼</label>
+                                <input type="password" name="pwd2" id="pwd2" method="post" required>
+                            </div>
+                            <div class="profilpassmessege">密碼與確認密碼輸入不一致，請重新輸入</div>
+                            <div class="profilnamearea">
+                                <label for="">姓名</label>
+                                <input type="text" name="m_name" value=<%=data.m_name %> required>
+                            </div>
+                            <div class="profilbirthdayarea">
+                                <label for="">生日</label>
+                                <input type="date" name="birthday" value=<%=BD %> required>
+                            </div>
+                            <div class="profilsexarea">
+                                <label for="">性別</label>
+                                <%if(data.gender==="男"){%>
+                                    <input type="radio" name="gender" value="男" checked>生理男
+                                    <input type="radio" name="gender" value="女">生理女
+                                    <%}else if(data.gender==="女" ){%>
+                                        <input type="radio" name="gender" value="男">生理男
+                                        <input type="radio" name="gender" value="女" checked>生理女
+                                        <%}else{%>
+                                            <input type="radio" name="gender" value="男">生理男
+                                            <input type="radio" name="gender" value="女">生理女
+                                            <%}%>
+                                                <!-- <input type="radio" name="gender" value="男" checked>生理男
+                                <input type="radio" name="gender" value="女">生理女 -->
+                            </div>
+                            <div class="profilphonearea">
+                                <label for="">手機</label>
+                                <input type="phone" name="phone" value=<%=data.phone %> required>
+                            </div>
+                            <div class="profiladdressarea">
+                                <label for="">通訊地址</label>
+                                <input type="text" name="address" value=<%=data.address %> required>
+                            </div>
+                            <div class="profilrevise">
+                                <!-- <button id="updata" >我要修改</button> -->
+                                <input type="button" id="updata" class="profilrevisebutton" value="我要修改">
+                            </div>
+                            <!-- <div class="profilsuccess">
+                                <div class="profilbutton">
+                                    <button>X</button>
+                                </div>
+                                <div class="profilsuccessword">
+                                    <h2>修改成功!</h2>
+                                    <p>5秒將自動跳轉</p>
+                                </div>
+                            </div> -->
+    </div>
+    </form>
+    <!-- 預留固定footer的位置 -->
+    <footer>
+        <div id="footer">
+            <div id="icon">
+                <div>
+                    <img id="footerLogo" src="./Source/IMG/Logo.png" alt="Logo" style="width: 100px;">
+                    <a href="https://www.facebook.com/ispanTaipei" target="_blank"><img src="./Source/IMG/FB.png"
+                            alt=""></a>
+                    <a href="https://www.instagram.com/5gutlab_zicehui/" target="_blank"><img src="./Source/IMG/ig.png"
+                            alt=""></a>
+                    <a onclick="self.location.href='mailto:iservice@ispan.com.tw;'"><img src="./Source/IMG/mail.png"
+                            alt=""></a>
+                </div>
+                <div>
+                    <h4>訂購電話</h4>
+                    <h6>04-1234567</h6><br>
+                    <h4>營業時間</h4>
+                    <h6>週二-週日10:00至19:00 每週一公休</h6><br>
+                    <h4>地址</h4>
+                    <h6>台中市南屯區公益路二段(國泰世華大樓18樓)</h6>
+                </div>
+            </div>
+            <div>
+                <small>Copyright © 2023 MFEE32 第一組. All rights reserved.</small>
+            </div>
+        </div>
+    </footer>
+    <!-- <div>會員資料修改</div>
+   
+   <% var YY = data.birthday.getFullYear().toString()%>
+   <% var MM = (data.birthday.getMonth()+1).toString().padStart(2,'0')%>
+   <% var DD = data.birthday.getDate().toString().padStart(2,'0')%>
+   <% var BD = YY+'-' + MM + '-'+DD %>
+   e-mail<input type="text" value=<%= data.email %> readonly > <br>
+    <form id="member">
+        密碼<input type="password" name="pwd" value=<%= data.pwd %>> <br>
+        姓名<input type="text" name="m_name" value=<%= data.m_name %>> <br>
+        生日<input type="date" name="birthday" value=<%= BD %>> <br>
+        性別<input type="text" name="gender" value=<%= data.gender %>> <br>
+        手機<input type="text" name="phone" value=<%= data.phone %>> <br>
+        地址<input type="text" name="address" value=<%= data.address %>> <br>
+        <input type="button" id="updata" value="修改">
+    </form> -->
+
+    <script>
+        // var password = document.querySelector(".profilpasswordarea input");
+        // var password2 = document.querySelector(".profilpassword2area input");
+        var profilpassmessege = document.querySelector(".profilpassmessege");
+
+        // 一開始就隱藏
+        profilpassmessege.style.display = "none";
+
+        // password2.addEventListener("input", function(){
+        //     if(password.value !== password2.value){
+        //         profilpassmessege.style.display = "block";
+        //     } else {
+        //         profilpassmessege.style.display = "none";
+        //     }
+        // });
+
+        $('#pwd2').on('change', function () {
+            if ($('#pwd').val() !== $('#pwd2').val()) {
+                profilpassmessege.style.display = "block";
+            } else {
+                profilpassmessege.style.display = "none";
+            }
+        })
+
+
+
+
+
+        $('#updata').on('click', function () {
+
+            var data = $('#member').serializeArray();
+
+            // console.log(file)
+
+
+            var JSONData = { m_id: <%= session.user.m_id %> }; //注意!!! 需先登入!!!!不然報錯!!!!!!
+
+            for (index in data) {
+                JSONData[data[index].name] = data[index].value;
+            }
+
+
+            $.ajax({
+                url: "/C05_4_1",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+
+                data: JSON.stringify(JSONData),
+                success: function (res) {
+                    alert("ok");
+                    location.href = '/';
+                },
+                error: function () {
+                    alert("系統錯誤!")
+                }
+            })
+        })
+    </script>
+    <script>
+        const loginButton = document.querySelector('.profilrevisebutton');
+        const successArea = document.querySelector('.profilsuccess');
+        loginButton.addEventListener('click', function () {
+            successArea.style.display = 'block';
+            setTimeout(function () {
+                successArea.style.display = 'none';
+            }, 5000);
+        });
+        const xButton = document.querySelector('.profilbutton button');
+        xButton.addEventListener('click', function () {
+            successArea.style.display = 'none';
+        });
+    </script>
+    <!-- ---------------------------引用區---------------------------------------- -->
+    <script src="./js/_js/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="../js/ADswiper.js"></script>
+
+</body>
+
+</html>
